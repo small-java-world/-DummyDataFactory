@@ -1,4 +1,4 @@
-package jp.small_java_world.dummydatafactory;
+package jp.small_java_world.dummydatafactory.data;
 
 public class SqlColumnData {
 	String columnName;

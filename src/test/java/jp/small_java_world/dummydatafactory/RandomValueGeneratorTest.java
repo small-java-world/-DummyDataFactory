@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.Mockito;
 
 import jp.small_java_world.dummydatafactory.entity.RandomValueGeneratorTargetDto;
+import jp.small_java_world.dummydatafactory.util.RandomDataUtil;
 import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 
 class RandomValueGeneratorTest {

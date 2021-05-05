@@ -3,13 +3,16 @@ package jp.small_java_world.dummydatafactory;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import jp.small_java_world.dummydatafactory.data.SqlColumnData;
+import jp.small_java_world.dummydatafactory.util.RandomDataUtil;
+
 public class RandomValueGenerator {
 	public static final int DAFAULT_DATA_SIZE = 10;
 
 	public static Object generateRandomValue(Class<?> type, SqlColumnData sqlColumnData) {
 		if (type.isAssignableFrom(String.class)) {
 			return RandomDataUtil
-					.generateRandomString(sqlColumnData != null ? sqlColumnData.dbDataSize : DAFAULT_DATA_SIZE);
+					.generateRandomString(sqlColumnData != null ? sqlColumnData.getDbDataSize() : DAFAULT_DATA_SIZE);
 		} else if (type.isAssignableFrom(Integer.class) || type.getName().equals("int")) {
 			return RandomDataUtil.generateRandomInt();
 		} else if (type.isAssignableFrom(Long.class) || type.getName().equals("long")) {

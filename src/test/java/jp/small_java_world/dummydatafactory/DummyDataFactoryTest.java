@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mockito;
 
+import jp.small_java_world.dummydatafactory.data.SqlColumnData;
 import jp.small_java_world.dummydatafactory.entity.DummyEntity;
 import jp.small_java_world.dummydatafactory.entity.FugaEntity;
 import jp.small_java_world.dummydatafactory.entity.HogeEntity;

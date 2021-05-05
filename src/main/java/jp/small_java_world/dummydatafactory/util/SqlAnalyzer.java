@@ -3,8 +3,8 @@ package jp.small_java_world.dummydatafactory.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import jp.small_java_world.dummydatafactory.SqlColumnData;
 import jp.small_java_world.dummydatafactory.config.ColumnTypeConfig;
+import jp.small_java_world.dummydatafactory.data.SqlColumnData;
 import net.sf.jsqlparser.JSQLParserException;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.statement.create.table.CreateTable;

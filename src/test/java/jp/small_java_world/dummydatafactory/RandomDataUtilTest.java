@@ -15,6 +15,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import jp.small_java_world.dummydatafactory.util.RandomDataUtil;
+
 class RandomDataUtilTest {
 	// [ \]^_`などはASCIIコードの0からz間でもLetterOrDigitでないので除外
 	final List<Integer> EXCLUDE_LETTER_OR_DIGIT_LIST = List.of(58, 59, 60, 61, 62, 64, 91, 92, 93, 94, 95, 96);

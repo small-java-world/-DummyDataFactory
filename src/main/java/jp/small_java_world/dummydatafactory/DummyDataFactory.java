@@ -10,6 +10,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jp.small_java_world.dummydatafactory.data.SqlColumnData;
 import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 import jp.small_java_world.dummydatafactory.util.SqlAnalyzer;
 import jp.small_java_world.dummydatafactory.util.SqlFileUtil;

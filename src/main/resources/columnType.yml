@@ -1,0 +1,8 @@
+character varying: String
+character: String
+integer: Integer
+timestamp: Timestamp
+timestamp with time zone: Timestamp
+smallint: Short
+date: Date
+bigint: Long

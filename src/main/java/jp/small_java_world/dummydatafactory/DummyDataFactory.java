@@ -4,11 +4,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 import jp.small_java_world.dummydatafactory.util.SqlAnalyzer;
 import jp.small_java_world.dummydatafactory.util.SqlFileUtil;
 
@@ -16,7 +18,6 @@ public class DummyDataFactory {
 	private static final Logger logger = LoggerFactory.getLogger(DummyDataFactory.class);
 
 	public static <T> T generateDummyInstance(Class<T> targetClass, boolean isEntity) throws Exception {
-
 		// targetClassとその親のフィールドを取得
 		Field[] ownFields = targetClass.getDeclaredFields();
 		Field[] superFields = targetClass.getSuperclass().getDeclaredFields();
@@ -70,4 +71,36 @@ public class DummyDataFactory {
 		return entity;
 	}
 
+	public static Map<String, Object> generateDummyEntities(List<Class<?>> targetClassList) throws Exception {
+		return generateDummyEntities(targetClassList, new HashMap<String, String>());
+	}
+
+	public static Map<String, Object> generateDummyEntities(List<Class<?>> targetClassList,
+			Map<String, String> relationMap) throws Exception {
+		Map<String, Object> result = new HashMap<String, Object>();
+		for (var targetClass : targetClassList) {
+			result.put(targetClass.getSimpleName(), generateDummyInstance(targetClass, true));
+		}
+
+		for (var entry : relationMap.entrySet()) {
+			for (var toTargetClass : targetClassList) {
+				if (entry.getKey().startsWith(toTargetClass.getSimpleName())) {
+					String toMemberName = entry.getKey().replace(toTargetClass.getSimpleName() + ".", "");
+					for (var fromTargetClass : targetClassList) {
+						if (entry.getValue().startsWith(fromTargetClass.getSimpleName())) {
+							String fromMemberName = entry.getValue().replace(fromTargetClass.getSimpleName() + ".", "");
+							Object fromObject = result.get(fromTargetClass.getSimpleName());
+							Object toObject = result.get(toTargetClass.getSimpleName());
+							Object fromValue = ReflectUtil.getFieldValue(fromObject, fromMemberName);
+
+							ReflectUtil.setFieldValue(toObject, toMemberName, fromValue);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		return result;
+	}
 }

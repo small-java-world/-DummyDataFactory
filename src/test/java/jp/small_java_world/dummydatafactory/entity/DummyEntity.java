@@ -3,7 +3,7 @@ package jp.small_java_world.dummydatafactory.entity;
 public class DummyEntity {
 	int integerMember;	
 	short shortMember;
-	
+
 	public int getIntegerMember() {
 		return integerMember;
 	}

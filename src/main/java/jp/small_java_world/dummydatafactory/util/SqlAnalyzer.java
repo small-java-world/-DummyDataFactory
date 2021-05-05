@@ -29,8 +29,6 @@ public class SqlAnalyzer {
 			}
 			
 			result.put(sqlColumnData.getColumnCamelCaseName(), sqlColumnData);
-//			System.out.println("columnName:" + columnDefinition.getColumnName() + " type:"
-//					+ columnDefinition.getColDataType().getDataType());
 		}
 		return result;
 	}

@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.Mockito;
 
 import jp.small_java_world.dummydatafactory.entity.RandomValueGeneratorTargetDto;
-import jp.small_java_world.dummydatafactory.util.TestUtil;
+import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 
 class RandomValueGeneratorTest {
 	private enum GenerateRandomValueTestType {
@@ -40,7 +40,7 @@ class RandomValueGeneratorTest {
 	@ParameterizedTest
 	@EnumSource(GenerateRandomValueTestType.class)
 	void testGenerateRandomValue(GenerateRandomValueTestType testType) throws NoSuchFieldException {
-		var targetField = TestUtil.getDeclaredField(RandomValueGeneratorTargetDto.class, testType.targetMemberName);
+		var targetField = ReflectUtil.getDeclaredField(RandomValueGeneratorTargetDto.class, testType.targetMemberName);
 
 		try (var randomDataUtilMock = Mockito.mockStatic(RandomDataUtil.class)) {
 			randomDataUtilMock.when(() -> {

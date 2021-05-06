@@ -10,20 +10,18 @@ import org.yaml.snakeyaml.Yaml;
 public class ColumnTypeConfig {
 	private static final Logger logger = LoggerFactory.getLogger(ColumnTypeConfig.class);
 
-	@SuppressWarnings({ "rawtypes", "unused" })
-	private static Map COLUMN_TYPE_MAP;
+	private static Map<?, ?> COLUMN_TYPE_MAP;
 
 	static {
 		InputStream inputStream = ColumnTypeConfig.class.getResourceAsStream("/columnType.yml");
-
 		Yaml yaml = new Yaml();
 		COLUMN_TYPE_MAP = yaml.loadAs(inputStream, Map.class);
 	}
 
 	public static String getJavaType(String dbDataType) {
-		if (COLUMN_TYPE_MAP.containsKey(dbDataType)) {
+		if (COLUMN_TYPE_MAP.containsKey(dbDataType.toLowerCase())) {
 			logger.debug("dbDataType={} javaType={}", dbDataType, COLUMN_TYPE_MAP.get(dbDataType));
-			return COLUMN_TYPE_MAP.get(dbDataType).toString();
+			return COLUMN_TYPE_MAP.get(dbDataType.toLowerCase()).toString();
 		} else {
 			logger.error("dbDataType={} javaType is not defined", dbDataType);
 		}

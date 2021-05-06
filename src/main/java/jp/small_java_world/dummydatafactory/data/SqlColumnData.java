@@ -46,5 +46,4 @@ public class SqlColumnData {
 	public void setDbDataSize(Integer dbDataSize) {
 		this.dbDataSize = dbDataSize;
 	}
-
 }

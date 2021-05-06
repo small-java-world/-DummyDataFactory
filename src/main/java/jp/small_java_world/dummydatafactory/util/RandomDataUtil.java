@@ -33,7 +33,7 @@ public class RandomDataUtil {
 		final char start = '0', end = 'F';
 
 		while (true) {
-			String first = generateRandomLetterOrDigit('1', '9', 1);
+			String first = generateRandomLetterOrDigit('1', 'F', 1);
 			String result = generateRandomLetterOrDigit(start, end, length - 1);
 			if (!randomStringCheckMap.contains(first + result)) {
 				randomStringCheckMap.add(first + result);
@@ -46,7 +46,7 @@ public class RandomDataUtil {
 		final char start = '0', end = '9';
 
 		while (true) {
-			String first = generateRandomLetterOrDigit('1', end, 1);
+			String first = generateRandomLetterOrDigit('1', '9', 1);
 			String result = generateRandomLetterOrDigit(start, end, length - 1);
 			if (!randomStringCheckMap.contains(first + result)) {
 				randomStringCheckMap.add(first + result);
@@ -123,5 +123,4 @@ public class RandomDataUtil {
 			}
 		}
 	}
-
 }

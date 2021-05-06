@@ -15,17 +15,10 @@ import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 
 class RandomValueGeneratorTest {
 	private enum GenerateRandomValueTestType {
-		STRING("memberString", "dummyString"), 
-		INTEGER("memberInteger", 1), 
-		PRIMITIVE_INT("memberInt", 2),
-		LONG("memberLong", 3L),
-		PRIMITIVE_LONG("memberLong", 4L),
-		FLOAT("memberFloat", 5f),
-		PRIMITIVE_FLOAT("memberfloat", 6f),
-		SHORT("memberShort", (short) 7),
-		PRIMITIVE_SHORT("membershort", (short) 8),
-		BOOLEAN("memberBoolean", true),
-		PRIMITIVE_BOOLEAN("memberboolean", false),
+		STRING("memberString", "dummyString"), INTEGER("memberInteger", 1), PRIMITIVE_INT("memberInt", 2),
+		LONG("memberLong", 3L), PRIMITIVE_LONG("memberLong", 4L), FLOAT("memberFloat", 5f),
+		PRIMITIVE_FLOAT("memberfloat", 6f), SHORT("memberShort", (short) 7), PRIMITIVE_SHORT("membershort", (short) 8),
+		BOOLEAN("memberBoolean", true), PRIMITIVE_BOOLEAN("memberboolean", false),
 		DATE("memberDate", Calendar.getInstance().getTime()),
 		TIMESTAMP("memberTimestamp", new Timestamp(Calendar.getInstance().getTime().getTime()));
 

@@ -18,7 +18,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import jp.small_java_world.dummydatafactory.util.RandomDataUtil;
 
 class RandomDataUtilTest {
-	// [ \]^_`などはASCIIコードの0からz間でもLetterOrDigitでないので除外
+	// [ \]^_`などはASCIIコードの0からz間でもLetterOrDigitでないので、これらが除外さていることを確認するときに利用
 	final List<Integer> EXCLUDE_LETTER_OR_DIGIT_LIST = List.of(58, 59, 60, 61, 62, 64, 91, 92, 93, 94, 95, 96);
 
 	@ParameterizedTest
@@ -46,13 +46,13 @@ class RandomDataUtilTest {
 		// result1が文字コード'0'と'F'の間に含まれていて、EXCLUDE_LETTER_OR_DIGIT_LISTに含まれていないことを検証
 		assertContainChar(result1, '0', 'F', EXCLUDE_LETTER_OR_DIGIT_LIST);
 		// 先頭は0以外の数字
-		assertContainChar(result1.substring(0, 1), '1', '9', EXCLUDE_LETTER_OR_DIGIT_LIST);
+		assertContainChar(result1.substring(0, 1), '1', 'F');
 
 		var result2 = RandomDataUtil.generateRandomHexString(length);
 		assertThat(result2).hasSize(length);
 		assertContainChar(result2, '0', 'F', EXCLUDE_LETTER_OR_DIGIT_LIST);
 		// 先頭は0以外の数字
-		assertContainChar(result2.substring(0, 1), '1', '9', EXCLUDE_LETTER_OR_DIGIT_LIST);
+		assertContainChar(result2.substring(0, 1), '1', 'F');
 
 		// result1とresult2が一致しないこと
 		assertThat(result2).isNotEqualTo(result1);
@@ -157,9 +157,8 @@ class RandomDataUtilTest {
 		assertTrue(result1 instanceof Integer);
 		assertThat(result1).isNotEqualTo(result2);
 		assertThat(result1).isNotEqualTo(result3);
-		assertThat(result2).isNotEqualTo(result3);
 	}
-	
+
 	@Test
 	void testGenerateRandomLong() {
 		var result1 = RandomDataUtil.generateRandomLong();
@@ -169,9 +168,8 @@ class RandomDataUtilTest {
 		assertTrue(result1 instanceof Long);
 		assertThat(result1).isNotEqualTo(result2);
 		assertThat(result1).isNotEqualTo(result3);
-		assertThat(result2).isNotEqualTo(result3);
 	}
-	
+
 	@Test
 	void testGenerateRandomShort() {
 		var result1 = RandomDataUtil.generateRandomShort();
@@ -181,7 +179,6 @@ class RandomDataUtilTest {
 		assertTrue(result1 instanceof Short);
 		assertThat(result1).isNotEqualTo(result2);
 		assertThat(result1).isNotEqualTo(result3);
-		assertThat(result2).isNotEqualTo(result3);
 	}
 
 }

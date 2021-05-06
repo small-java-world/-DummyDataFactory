@@ -26,7 +26,7 @@ public class SqlFileUtil {
 			if (StringUtils.isNotEmpty(sqlEndKeyword) && sqlContent.contains(sqlEndKeyword)) {
 				sqlContent = sqlContent.substring(0, sqlContent.indexOf(sqlEndKeyword));
 			}
-			
+
 			logger.debug("getSqlContent return value {}", sqlContent);
 			return sqlContent;
 		} else {

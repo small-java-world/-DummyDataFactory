@@ -1,6 +1,6 @@
 package jp.small_java_world.dummydatafactory.util;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.lang.reflect.Field;
 

@@ -1,7 +1,7 @@
 package jp.small_java_world.dummydatafactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 
 import java.util.List;
@@ -16,9 +16,9 @@ import jp.small_java_world.dummydatafactory.data.SqlColumnData;
 import jp.small_java_world.dummydatafactory.entity.DummyEntity;
 import jp.small_java_world.dummydatafactory.entity.FugaEntity;
 import jp.small_java_world.dummydatafactory.entity.HogeEntity;
+import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 import jp.small_java_world.dummydatafactory.util.SqlAnalyzer;
 import jp.small_java_world.dummydatafactory.util.SqlFileUtil;
-import jp.small_java_world.dummydatafactory.util.ReflectUtil;
 
 class DummyDataFactoryTest {
 	@ParameterizedTest

@@ -34,7 +34,7 @@ public class DummyDataFactory {
 		// 厳密にはキーはdbのカラム名をキャメルケースに変換した値
 		Map<String, SqlColumnData> sqlColumnDataMap = new HashMap<>();
 
-		// isEntity==trueの場合は対応するcreate sqlの中身を読み込んでMap<String, SqlColumnData>を生成
+		// isEntity=trueの場合は対応するcreate sqlの中身を読み込んでMap<String, SqlColumnData>を生成
 		if (isEntity) {
 			String sqlContent = SqlFileUtil.getSqlContent(targetClass.getSimpleName());
 			if (sqlContent != null) {
@@ -78,11 +78,16 @@ public class DummyDataFactory {
 
 	public static Map<String, Object> generateDummyEntities(List<Class<?>> targetClassList,
 			Map<String, String> relationMap) throws Exception {
-		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		// targetClassListに対応するインスタンスを生成し、各targetClass.getSimpleName()をキーとして、resultMapにインスタンスを値として格納
 		for (var targetClass : targetClassList) {
-			result.put(targetClass.getSimpleName(), generateDummyInstance(targetClass, true));
+			resultMap.put(targetClass.getSimpleName(), generateDummyInstance(targetClass, true));
 		}
 
+		// relationMapに設定されている情報を利用して値をコピー
+		// relationMap = Map.of("FugaEntity.fugaId",
+		// "HogeEntity.id"))の場合、FugaEntity.fugaIdにHogeEntity.idをコピー
 		for (var entry : relationMap.entrySet()) {
 			for (var toTargetClass : targetClassList) {
 				if (entry.getKey().startsWith(toTargetClass.getSimpleName())) {
@@ -90,8 +95,8 @@ public class DummyDataFactory {
 					for (var fromTargetClass : targetClassList) {
 						if (entry.getValue().startsWith(fromTargetClass.getSimpleName())) {
 							String fromMemberName = entry.getValue().replace(fromTargetClass.getSimpleName() + ".", "");
-							Object fromObject = result.get(fromTargetClass.getSimpleName());
-							Object toObject = result.get(toTargetClass.getSimpleName());
+							Object fromObject = resultMap.get(fromTargetClass.getSimpleName());
+							Object toObject = resultMap.get(toTargetClass.getSimpleName());
 							Object fromValue = ReflectUtil.getFieldValue(fromObject, fromMemberName);
 
 							ReflectUtil.setFieldValue(toObject, toMemberName, fromValue);
@@ -102,6 +107,6 @@ public class DummyDataFactory {
 			}
 		}
 
-		return result;
+		return resultMap;
 	}
 }

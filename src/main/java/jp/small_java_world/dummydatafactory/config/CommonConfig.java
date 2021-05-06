@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
@@ -27,21 +25,21 @@ public class CommonConfig {
 			logger.error("load properties fail {}", CONFIG_PROP_FILE);
 		}
 	}
-	
+
 	public static String getSqlDirName() {
 		return (String) properties.get("sqlDirName");
 	}
-	
+
 	public static String getSqlFilePattern() {
-		var result =  (String)properties.get("sqlFilePattern");
-		if(StringUtils.isEmpty(result)) {
+		var result = (String) properties.get("sqlFilePattern");
+		if (StringUtils.isEmpty(result)) {
 			logger.error("sqlFilePattern is not defined in dummyDataFactorySetting.properties");
 		}
-		
+
 		return result;
 	}
-	
+
 	public static String getSqlEndKeyword() {
-		return (String)properties.get("sqlEndKeyword");
+		return (String) properties.get("sqlEndKeyword");
 	}
 }

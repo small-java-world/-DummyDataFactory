@@ -21,14 +21,13 @@ public class ColumnTypeConfig {
 	}
 
 	public static String getJavaType(String dbDataType) {
-		if(COLUMN_TYPE_MAP.containsKey(dbDataType)) {
+		if (COLUMN_TYPE_MAP.containsKey(dbDataType)) {
 			logger.debug("dbDataType={} javaType={}", dbDataType, COLUMN_TYPE_MAP.get(dbDataType));
 			return COLUMN_TYPE_MAP.get(dbDataType).toString();
-		}
-		else {
+		} else {
 			logger.error("dbDataType={} javaType is not defined", dbDataType);
 		}
-		
+
 		return null;
 	}
 }

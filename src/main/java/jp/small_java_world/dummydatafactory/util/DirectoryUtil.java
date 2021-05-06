@@ -19,8 +19,8 @@ public class DirectoryUtil {
 		}
 
 		StringBuilder upperPathPrefix = new StringBuilder(".." + File.separator);
-	    File targetDirFile = null;
-	    
+		File targetDirFile = null;
+
 		var rootPath = url.getPath();
 		int counter = 0;
 		while (true) {
@@ -30,7 +30,7 @@ public class DirectoryUtil {
 				logger.debug("{} exist!!", currentTargetPath);
 				break;
 			}
-			
+
 			if (counter > 5) {
 				logger.error("getPath fail");
 				return null;
@@ -39,7 +39,7 @@ public class DirectoryUtil {
 			upperPathPrefix.append(".." + File.separator);
 			counter++;
 		}
-		
+
 		return targetDirFile.getPath();
 	}
 }

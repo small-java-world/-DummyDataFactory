@@ -16,18 +16,18 @@ public class SqlAnalyzer {
 
 		for (var columnDefinition : createTable.getColumnDefinitions()) {
 			SqlColumnData sqlColumnData = new SqlColumnData();
-			
+
 			var javaType = ColumnTypeConfig.getJavaType(columnDefinition.getColDataType().getDataType());
 			sqlColumnData.setJavaType(javaType);
 			sqlColumnData.setDbDataType(columnDefinition.getColDataType().getDataType());
 			sqlColumnData.setColumnName(columnDefinition.getColumnName());
 			sqlColumnData.setColumnCamelCaseName(StringConvertUtil.toSnakeCaseCase(columnDefinition.getColumnName()));
-			
+
 			var argumentsStringList = columnDefinition.getColDataType().getArgumentsStringList();
 			if (argumentsStringList != null) {
 				sqlColumnData.setDbDataSize(Integer.parseInt(argumentsStringList.get(0)));
 			}
-			
+
 			result.put(sqlColumnData.getColumnCamelCaseName(), sqlColumnData);
 		}
 		return result;

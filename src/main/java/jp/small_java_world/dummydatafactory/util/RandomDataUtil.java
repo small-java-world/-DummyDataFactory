@@ -17,40 +17,41 @@ public class RandomDataUtil {
 	static Set<Short> randomShortCheckMap = new HashSet<Short>();
 	static Set<String> randomStringCheckMap = new HashSet<String>();
 
+	static final int MAX_RETRY = 10;
+
 	public static String generateRandomString(final int length) {
-		final char start = '0', end = 'z';
+		return generateRandomString(length, '0', 'z', (char) 0);
+	}
+
+	public static String generateRandomHexString(final int length) {
+		return generateRandomString(length, '0', 'F', '1');
+	}
+
+	public static String generateRandomNumberString(final int length) {
+		return generateRandomString(length, '0', '9', '1');
+	}
+
+	public static String generateRandomString(final int length, final char start, final char end,
+			final char firstStart) {
+		int retryCount = 0;
+		String firstStr = "", result = "";
 
 		while (true) {
-			String result = generateRandomLetterOrDigit(start, end, length);
+			// firstStartがasciiコードの0でなければ先頭の1文字目と2文字目以降の生成を別に行う。
+			if (firstStart != 0) {
+				firstStr = generateRandomLetterOrDigit(firstStart, end, 1);
+				result = length == 1 ? firstStr : firstStr + generateRandomLetterOrDigit(start, end, length - 1);
+			} else {
+				result = generateRandomLetterOrDigit(start, end, length);
+			}
+
 			if (!randomStringCheckMap.contains(result)) {
 				randomStringCheckMap.add(result);
 				return result;
 			}
-		}
-	}
 
-	public static String generateRandomHexString(final int length) {
-		final char start = '0', end = 'F';
-
-		while (true) {
-			String first = generateRandomLetterOrDigit('1', 'F', 1);
-			String result = generateRandomLetterOrDigit(start, end, length - 1);
-			if (!randomStringCheckMap.contains(first + result)) {
-				randomStringCheckMap.add(first + result);
-				return first + result;
-			}
-		}
-	}
-
-	public static String generateRandomNumberString(final int length) {
-		final char start = '0', end = '9';
-
-		while (true) {
-			String first = generateRandomLetterOrDigit('1', '9', 1);
-			String result = generateRandomLetterOrDigit(start, end, length - 1);
-			if (!randomStringCheckMap.contains(first + result)) {
-				randomStringCheckMap.add(first + result);
-				return first + result;
+			if (retryCount++ > MAX_RETRY) {
+				return result;
 			}
 		}
 	}
@@ -61,6 +62,8 @@ public class RandomDataUtil {
 	}
 
 	public static Date generateRandomDate() {
+		int retryCount = 0;
+		
 		while (true) {
 			var calendar = Calendar.getInstance();
 			boolean isAdd = RandomUtils.nextBoolean();
@@ -70,10 +73,16 @@ public class RandomDataUtil {
 				randomDateCheckMap.add(calendar.getTime());
 				return calendar.getTime();
 			}
+			
+			if (retryCount++ > MAX_RETRY) {
+				return calendar.getTime();
+			}
 		}
 	}
 
 	public static Timestamp generateRandomTimestamp() {
+		int retryCount = 0;
+		
 		while (true) {
 			var result = new Timestamp(generateRandomDate().getTime());
 
@@ -81,24 +90,40 @@ public class RandomDataUtil {
 				randomTimestampCheckMap.add(result);
 				return result;
 			}
+			
+			if (retryCount++ > MAX_RETRY) {
+				return result;
+			}
 		}
 	}
 
 	public static Integer generateRandomInt() {
+		int retryCount = 0;
+		
 		while (true) {
 			Integer result = RandomUtils.nextInt();
 			if (!randomIntCheckMap.contains(result)) {
 				randomIntCheckMap.add(result);
 				return result;
 			}
+			
+			if (retryCount++ > MAX_RETRY) {
+				return result;
+			}
 		}
 	}
 
 	public static Long generateRandomLong() {
+		int retryCount = 0;
+		
 		while (true) {
 			Long result = RandomUtils.nextLong();
 			if (!randomLongCheckMap.contains(result)) {
 				randomLongCheckMap.add(result);
+				return result;
+			}
+			
+			if (retryCount++ > MAX_RETRY) {
 				return result;
 			}
 		}
@@ -115,10 +140,16 @@ public class RandomDataUtil {
 	}
 
 	public static Short generateRandomShort() {
+		int retryCount = 0;
+		
 		while (true) {
 			Short result = (short) RandomUtils.nextInt(0, Short.MAX_VALUE);
 			if (!randomShortCheckMap.contains(result)) {
 				randomShortCheckMap.add(result);
+				return result;
+			}
+			
+			if (retryCount++ > MAX_RETRY) {
 				return result;
 			}
 		}

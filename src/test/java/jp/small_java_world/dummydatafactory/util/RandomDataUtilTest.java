@@ -1,4 +1,4 @@
-package jp.small_java_world.dummydatafactory;
+package jp.small_java_world.dummydatafactory.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,7 +15,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import jp.small_java_world.dummydatafactory.util.RandomDataUtil;
 
 class RandomDataUtilTest {
 	// [ \]^_`などはASCIIコードの0からz間でもLetterOrDigitでないので、これらが除外さていることを確認するときに利用

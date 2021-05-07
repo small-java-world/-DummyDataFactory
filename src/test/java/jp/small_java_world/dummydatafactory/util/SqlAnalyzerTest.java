@@ -11,7 +11,7 @@ class SqlAnalyzerTest {
 	@Test
 	void testGetSqlColumnDataMap() throws JSQLParserException {
 		var result = SqlAnalyzer.getSqlColumnDataMap("CREATE TABLE todo( " 
-				+ "	id integer not null,"
+				+ " id integer not null,"
 				+ " title character varying(32),"
 				+ " content character varying(100),"
 				+ "limit_time timestamp with time zone,"

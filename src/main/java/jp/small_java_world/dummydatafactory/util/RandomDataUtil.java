@@ -34,13 +34,13 @@ public class RandomDataUtil {
 	public static String generateRandomString(final int length, final char start, final char end,
 			final char firstStart) {
 		int retryCount = 0;
-		String firstStr = "", result = "";
+		String firstResult = "", result = "";
 
 		while (true) {
 			// firstStartがasciiコードの0でなければ先頭の1文字目と2文字目以降の生成を別に行う。
 			if (firstStart != 0) {
-				firstStr = generateRandomLetterOrDigit(firstStart, end, 1);
-				result = length == 1 ? firstStr : firstStr + generateRandomLetterOrDigit(start, end, length - 1);
+				firstResult = generateRandomLetterOrDigit(firstStart, end, 1);
+				result = length == 1 ? firstResult : firstResult + generateRandomLetterOrDigit(start, end, length - 1);
 			} else {
 				result = generateRandomLetterOrDigit(start, end, length);
 			}

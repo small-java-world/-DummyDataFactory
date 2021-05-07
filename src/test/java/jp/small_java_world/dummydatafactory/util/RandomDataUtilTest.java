@@ -44,14 +44,14 @@ class RandomDataUtilTest {
 		assertThat(result1).hasSize(length);
 		// result1が文字コード'0'と'F'の間に含まれていて、EXCLUDE_LETTER_OR_DIGIT_LISTに含まれていないことを検証
 		assertContainChar(result1, '0', 'F', EXCLUDE_LETTER_OR_DIGIT_LIST);
-		// 先頭は0以外の数字
-		assertContainChar(result1.substring(0, 1), '1', 'F');
+		// 先頭は0以外
+		assertContainChar(result1.substring(0, 1), '1', 'F', EXCLUDE_LETTER_OR_DIGIT_LIST);
 
 		var result2 = RandomDataUtil.generateRandomHexString(length);
 		assertThat(result2).hasSize(length);
 		assertContainChar(result2, '0', 'F', EXCLUDE_LETTER_OR_DIGIT_LIST);
-		// 先頭は0以外の数字
-		assertContainChar(result2.substring(0, 1), '1', 'F');
+		// 先頭は0以外
+		assertContainChar(result2.substring(0, 1), '1', 'F', EXCLUDE_LETTER_OR_DIGIT_LIST);
 
 		// result1とresult2が一致しないこと
 		assertThat(result2).isNotEqualTo(result1);

@@ -25,7 +25,7 @@ class DummyDataFactoryTest {
 	@ValueSource(strings = { "true", "false" })
 	void testGenerateDummyInstance(boolean isEntity) throws Exception {
 		var integerMemberField = ReflectUtil.getDeclaredField(DummyEntity.class, "integerMember");
-		var shortMemberMemberField = ReflectUtil.getDeclaredField(DummyEntity.class, "shortMember");
+		var shortMemberField = ReflectUtil.getDeclaredField(DummyEntity.class, "shortMember");
 
 		try (var randomValueGeneratorMock = Mockito.mockStatic(RandomValueGenerator.class);
 				var sqlFileUtilMock = Mockito.mockStatic(SqlFileUtil.class);
@@ -54,7 +54,7 @@ class DummyDataFactoryTest {
 
 			// DummyEntityのshortMemberに対するダミーデータの生成時の振る舞いを定義
 			randomValueGeneratorMock.when(() -> {
-				RandomValueGenerator.generateRandomValue(shortMemberMemberField.getType(), shortMemberSqlColumnData);
+				RandomValueGenerator.generateRandomValue(shortMemberField.getType(), shortMemberSqlColumnData);
 			}).thenReturn((short) 101);
 
 			// DummyDataFactory.generateDummyInstance(DummyEntity.class, isEntity)を呼び出して値の検証
@@ -71,7 +71,7 @@ class DummyDataFactoryTest {
 			randomValueGeneratorMock.verify(() -> RandomValueGenerator.generateRandomValue(integerMemberField.getType(),
 					integerMemberSqlColumnData), times(1));
 			randomValueGeneratorMock.verify(() -> RandomValueGenerator
-					.generateRandomValue(shortMemberMemberField.getType(), shortMemberSqlColumnData), times(1));
+					.generateRandomValue(shortMemberField.getType(), shortMemberSqlColumnData), times(1));
 
 		}
 	}

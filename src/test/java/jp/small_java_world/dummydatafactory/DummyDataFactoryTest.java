@@ -43,8 +43,8 @@ class DummyDataFactoryTest {
 				// SqlAnalyzer.getSqlColumnDataMap("dummy create sql")の振る舞いを定義
 				sqlAnalyzerMock.when(() -> {
 					SqlAnalyzer.getSqlColumnDataMap("dummy create sql");
-				}).thenReturn(
-						Map.of("integerMember", integerMemberSqlColumnData, "shortMember", shortMemberSqlColumnData));
+				}).thenReturn(Map.of(integerMemberField.getName(), integerMemberSqlColumnData,
+						shortMemberField.getName(), shortMemberSqlColumnData));
 			}
 
 			// DummyEntityのintegerMemberに対するダミーデータの生成時の振る舞いを定義
@@ -70,8 +70,8 @@ class DummyDataFactoryTest {
 
 			randomValueGeneratorMock.verify(() -> RandomValueGenerator.generateRandomValue(integerMemberField.getType(),
 					integerMemberSqlColumnData), times(1));
-			randomValueGeneratorMock.verify(() -> RandomValueGenerator
-					.generateRandomValue(shortMemberField.getType(), shortMemberSqlColumnData), times(1));
+			randomValueGeneratorMock.verify(() -> RandomValueGenerator.generateRandomValue(shortMemberField.getType(),
+					shortMemberSqlColumnData), times(1));
 
 		}
 	}

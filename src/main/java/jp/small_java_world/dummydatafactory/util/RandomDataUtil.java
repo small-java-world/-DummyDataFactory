@@ -130,8 +130,8 @@ public class RandomDataUtil {
 	}
 
 	public static Float generateRandomFloat() {
-		var randInt1 = generateRandomInt();
-		var randInt2 = generateRandomInt();
+		var randInt1 = RandomUtils.nextInt();
+		var randInt2 = RandomUtils.nextInt();
 		return (float) (randInt1 / randInt2);
 	}
 

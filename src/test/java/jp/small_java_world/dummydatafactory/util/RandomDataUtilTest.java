@@ -156,6 +156,7 @@ class RandomDataUtilTest {
 		assertTrue(result1 instanceof Integer);
 		assertThat(result1).isNotEqualTo(result2);
 		assertThat(result1).isNotEqualTo(result3);
+		assertThat(result2).isNotEqualTo(result3);
 	}
 
 	@Test
@@ -167,6 +168,7 @@ class RandomDataUtilTest {
 		assertTrue(result1 instanceof Long);
 		assertThat(result1).isNotEqualTo(result2);
 		assertThat(result1).isNotEqualTo(result3);
+		assertThat(result2).isNotEqualTo(result3);
 	}
 
 	@Test
@@ -178,6 +180,7 @@ class RandomDataUtilTest {
 		assertTrue(result1 instanceof Short);
 		assertThat(result1).isNotEqualTo(result2);
 		assertThat(result1).isNotEqualTo(result3);
+		assertThat(result2).isNotEqualTo(result3);
 	}
 
 }
